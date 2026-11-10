@@ -852,7 +852,9 @@ button:disabled {
     margin-top: 0.7rem;
     padding-top: 0.5rem;
     border-top: 1.5pt solid #0f6b5c;
-    break-inside: auto;
+    /* Prefer a break at the section rule over splitting the chart box */
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .section-block:first-child {
@@ -879,6 +881,11 @@ button:disabled {
     width: 100% !important;
     max-width: none !important;
     box-sizing: border-box;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    -webkit-column-break-inside: avoid;
+    break-before: avoid-page;
+    page-break-before: avoid;
   }
 
   .fingering-legend {
@@ -888,11 +895,6 @@ button:disabled {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-    -webkit-column-break-inside: avoid;
-    break-before: avoid-page;
-    page-break-before: avoid;
   }
 
   .finger-card {
