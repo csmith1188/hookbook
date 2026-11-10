@@ -280,11 +280,13 @@ function renderTablature(data) {
   const sections = (data.sections || []).filter((s) => s.tablature);
   const title = data.song || 'Song';
   const noteMode = data.chordRootMode ? 'Chord roots' : 'Melody';
+  const bpm = sections.map((s) => s.bpm).find(Boolean);
+  const bpmLabel = bpm ? `${bpm} BPM` : null;
   tabTitle.textContent = title;
   tabSummary.innerHTML =
     `<div class="summary-line"><strong>Source:</strong> ${escapeHtml(
       noteMode
-    )}</div>` +
+    )}${bpmLabel ? ` · ${escapeHtml(bpmLabel)}` : ''}</div>` +
     sections
       .map(
         (s) =>
@@ -298,6 +300,7 @@ function renderTablature(data) {
   printMeta.textContent = [
     data.artist || null,
     noteMode,
+    bpmLabel,
     sections.map((s) => s.label || s.section).join(', '),
     targetKeySelect.options[targetKeySelect.selectedIndex]
       ? targetKeySelect.options[targetKeySelect.selectedIndex].text
@@ -320,15 +323,10 @@ function renderTablature(data) {
 }
 
 function sectionHeading(sec, chordRootMode) {
-  const tab = sec.tablature || {};
-  const keyName = tab.transposedKey || sec.key;
-  const modeName = tab.transposedMode || sec.scale || '';
   const isChords = Boolean(chordRootMode) || sec.noteMode === 'chord-roots';
   const bits = [
     sec.label || sec.section,
     isChords ? 'Chord roots' : null,
-    keyName ? `${keyName} ${modeName}`.trim() : null,
-    sec.bpm ? `${sec.bpm} BPM` : null,
   ].filter(Boolean);
   return bits.join(' · ');
 }

@@ -879,11 +879,10 @@ button:disabled {
     border-radius: 0;
     padding: 0.35rem;
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100% !important;
+    min-width: 0;
     box-sizing: border-box;
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-    -webkit-column-break-inside: avoid;
+    /* Stay with the section heading; section-block handles keep-together */
     break-before: avoid-page;
     page-break-before: avoid;
   }
@@ -895,6 +894,9 @@ button:disabled {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    -webkit-column-break-inside: avoid;
   }
 
   .finger-card {
@@ -917,7 +919,8 @@ button:disabled {
     gap: 0.35rem;
     padding: 0.25rem;
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100% !important;
+    min-width: 0;
     box-sizing: border-box;
   }
 
@@ -929,7 +932,8 @@ button:disabled {
     row-gap: 0.4rem;
     flex-wrap: wrap;
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100% !important;
+    min-width: 0;
     box-sizing: border-box;
   }
 
