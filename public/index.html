@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hookbook — C Tin Whistle Tablature</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <p class="eyebrow">TheoryTab → tin whistle</p>
+        <h1 class="brand">Hookbook</h1>
+        <p class="tagline">
+          Search Hooktheory by song or artist — then read the melody as C tin
+          whistle finger charts.
+        </p>
+      </header>
+
+      <section class="search" aria-labelledby="search-heading">
+        <h2 id="search-heading" class="visually-hidden">Search</h2>
+        <form id="search-form" class="search-form">
+          <label class="field">
+            <span id="query-label">Song or artist</span>
+            <input
+              id="query"
+              name="query"
+              type="text"
+              placeholder="e.g. Adele, Someone Like You"
+              value="Adele"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label class="field field-narrow">
+            <span>Transpose to</span>
+            <select id="target-key" name="targetKey" aria-label="Target key">
+              <option value="C/Am" selected>C Major / A Minor</option>
+            </select>
+          </label>
+          <button type="submit" id="search-btn">Search</button>
+        </form>
+        <p id="hint" class="hint">
+          Searches TheoryTab by song or artist name.
+        </p>
+      </section>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
+      <section id="results-section" class="results" hidden>
+        <div class="results-head">
+          <h2>Songs</h2>
+          <div class="pager">
+            <button type="button" id="prev-page" disabled>Previous</button>
+            <span id="page-label">Page 1</span>
+            <button type="button" id="next-page" disabled>Next</button>
+          </div>
+        </div>
+        <ul id="results" class="result-list"></ul>
+      </section>
+
+      <section id="song-panel" class="song-panel" hidden>
+        <div class="song-panel-head">
+          <div>
+            <p class="song-panel-eyebrow">Selected song</p>
+            <h2>
+              <a
+                id="selected-title"
+                class="selected-title-link"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Song</a
+              >
+            </h2>
+            <p id="selected-meta" class="selected-meta"></p>
+          </div>
+          <button type="button" id="change-song" class="secondary-btn">
+            Change song
+          </button>
+        </div>
+
+        <fieldset class="check-box-set" id="section-filters">
+          <legend>Sections</legend>
+          <div class="check-row" id="section-checkboxes"></div>
+        </fieldset>
+
+        <fieldset class="check-box-set" id="output-filters">
+          <legend>Output</legend>
+          <div class="check-row">
+            <label class="check">
+              <input type="radio" name="output" value="chart" checked />
+              Finger chart
+            </label>
+            <label class="check">
+              <input type="radio" name="output" value="keyroll" />
+              Fingering key + piano-roll
+            </label>
+            <label class="check">
+              <input type="checkbox" id="chord-root-mode" />
+              Chord root notes
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section id="tab-section" class="tablature" hidden>
+        <div class="tab-meta">
+          <div>
+            <h2 id="tab-title">Tablature</h2>
+            <p id="tab-summary"></p>
+          </div>
+          <button type="button" id="print-charts" class="secondary-btn print-btn">
+            Print charts
+          </button>
+        </div>
+
+        <div id="print-sheet" class="print-sheet">
+          <header class="print-booklet-header" aria-hidden="true">
+            <h2 id="print-title"></h2>
+            <p id="print-meta"></p>
+          </header>
+
+          <div class="legend">
+            <span><i class="swatch covered"></i> covered</span>
+            <span><i class="swatch open"></i> open</span>
+            <span><i class="swatch half"></i> half-hole</span>
+            <span class="overblow-note">↑ = blow harder (2nd octave)</span>
+          </div>
+
+          <div id="out-chart" class="output-block" hidden>
+            <div id="chart-sections"></div>
+          </div>
+
+          <div id="out-keyroll" class="output-block" hidden>
+            <div id="keyroll-sections"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>
